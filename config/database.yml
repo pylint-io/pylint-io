@@ -1,10 +1,7 @@
+# Database configuration. All secrets are stored in secrets.yml
+# This file is safe to commit.
+#
 # MySQL. Versions 5.1.10 and up are supported.
-#
-# Install the MySQL driver
-#   gem install mysql2
-#
-# Ensure the MySQL gem is defined in your Gemfile
-#   gem 'mysql2'
 #
 # And be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.7/en/old-client.html
@@ -13,20 +10,19 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password:
-  host: localhost
+  host: <%= Rails.application.secrets[:database][:hody] %>
+  database: <%= Rails.application.secrets[:database][:name] %>
+  username: <%= Rails.application.secrets[:database][:username] %>
+  password: <%= Rails.application.secrets[:database][:password] %>
 
 development:
   <<: *default
-  database: pylint-io_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: pylint-io_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -47,8 +43,8 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+beta:
+  <<: *default
+
 production:
   <<: *default
-  database: pylint-io_production
-  username: pylint-io
-  password: <%= ENV['PYLINT-IO_DATABASE_PASSWORD'] %>
