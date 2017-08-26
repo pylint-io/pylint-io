@@ -1,3 +1,28 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+html, body {
+  background-color: #f3f5e9;
+  color: #003300;
+  font-size: 20px;
+  font-family: monaco, Consolas, 'Lucida Console', monospace;
+}
+.container {
+  margin-top: 8rem;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+.container img {
+  display: block;
+  margin: 0 auto;
+}
+h1, p {
+  text-align: center;
+}
+p {
+  margin-top: 2rem;
+}
+.footer {
+  margin-top: 4rem;
+}
