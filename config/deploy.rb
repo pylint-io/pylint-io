@@ -4,10 +4,10 @@ lock "3.9.0"
 set :application, "pylint.io"
 set :repo_url, "git@github.com:pylint-io/pylint-io.git"
 
+# default is to deploy production branch
 set :branch, "master"
-# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
-set :deploy_to, "/data/www/pylint.io"
+# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
