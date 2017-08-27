@@ -1,6 +1,9 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Custom configuration item to store the name of the app
+  config.application_name = 'pylint.io'
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
