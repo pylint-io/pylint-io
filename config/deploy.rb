@@ -25,7 +25,7 @@ set :rbenv_type, :user
 # Default value for :linked_files is []
 # append :linked_files, "config/database.yml", "config/secrets.yml"
 
-# Default value for linked_dirs is []
+# for puma
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets"
 
 # Default value for default_env is {}
