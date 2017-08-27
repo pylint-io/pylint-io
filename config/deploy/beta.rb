@@ -3,7 +3,7 @@
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
 
-server "pylint.io", user: "deploy", roles: %w{web app db}
+server "pylint.io", user: "deploy", roles: %w{web app db}, ssh_options: "-l"
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
