@@ -4,11 +4,14 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
-# Ignore secrets.yml
+# no secrets in git
 /config/secrets.yml
 
 # Ignore bundler config.
 /.bundle
+
+# if bundle --path vendor/bundle, then we don't want those checked in
+/vendor/bundle
 
 # Ignore all logfiles and tempfiles.
 /log/*
