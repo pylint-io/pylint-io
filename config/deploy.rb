@@ -9,6 +9,9 @@ set :branch, "master"
 
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
+# rbenv
+set :rbenv_type, :user
+
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
 
