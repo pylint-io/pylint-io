@@ -1,17 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+# we expect module to be the same as repo
 one:
-  service: MyString
-  organization: MyString
-  repository: MyString
-  branch: MyString
-  module: MyString
-  rating: 9.99
+  service: github
+  organization: org
+  repository: repo
+  branch: master
+  module: repo
+  rating: 7.79
 
+# module and repository should be different
 two:
-  service: MyString
-  organization: MyString
-  repository: MyString
-  branch: MyString
-  module: MyString
-  rating: 9.99
+  service: github
+  organization: org
+  repository: repo
+  branch: develop
+  module: mod
+  rating: 4.26

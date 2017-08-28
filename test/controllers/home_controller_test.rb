@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class HomeControllerTest < ActionDispatch::IntegrationTest
+  test "routing" do
+    assert_routing "/", {controller: "home", action: "index"}
+  end
+  
   test "should get index" do
-    get home_index_url
+    get root_url
     assert_response :success
   end
 
