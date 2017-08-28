@@ -2,7 +2,7 @@ class BadgeController < ApplicationController
   def generate
     left, @rating = params[:spec].split('-')
     if @rating
-      render "generate", layout: false, content_type: "image/svg+xml"
+      render "badge", layout: false, content_type: "image/svg+xml"
     else
       render "unknown", layout: false, content_type: "image/svg+xml"
     end
@@ -25,13 +25,20 @@ class BadgeController < ApplicationController
       :branch => params[:branch], \
       :module => params[:module], \
     }
-    record = Rating.where(conditions).order(:created_at).first
+    @rating = Rating.where(conditions).order(:created_at).first
 
-    if record
-      @rating = record.rating
-      render "generate", layout: false, content_type: "image/svg+xml"
-    else
-      render "unknown", layout: false, content_type: "image/svg+xml"
+    respond_to do |format|
+      format.svg do
+        if @rating
+          render "badge", layout: false, content_type: "image/svg+xml"
+        else
+          render "unknown", layout: false, content_type: "image/svg+xml"
+        end
+      end
+      format.json do
+        render "rating"
+      end
     end
+
   end
 end
