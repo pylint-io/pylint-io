@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  service: MyString
+  organization: MyString
+  repository: MyString
+  branch: MyString
+  module: MyString
+  rating: 9.99
+
+two:
+  service: MyString
+  organization: MyString
+  repository: MyString
+  branch: MyString
+  module: MyString
+  rating: 9.99
