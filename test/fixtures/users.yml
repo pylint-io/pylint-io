@@ -2,6 +2,5 @@
 
 kotfu:
   service: github
-  service_uid: 100101839
-  name: Kotfu
+  login: jared-muzolabs
   repositories: tomcatmanager
