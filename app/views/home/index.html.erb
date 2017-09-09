@@ -2,9 +2,13 @@
   <h1><%= Rails.configuration.application_name %></h1>
   <%= image_tag('pylint-example.svg', alt: 'pylint badge') %>
   <p>need a pylint badge?</p>
-  <p>~ coming soon ~</p>
+  <div class='login'>
+    <%= link_to 'Sign in with GitHub', login_path, class: 'github button' %>
+  </div>
   <div class='footer'>
-    <p>a muzo labs project</p>
+    <p>
+      <%= image_tag 'muzo-labs-logo.png', alt: 'Muzo Labs Logo' %>
+    </p>
   </div>
 </div>
 

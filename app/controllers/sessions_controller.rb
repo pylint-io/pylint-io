@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   protect_from_forgery :except => [:create]
 
   def new
-    redirect_to '/auth/developer'
+    redirect_to '/auth/github'
   end
 
   def create

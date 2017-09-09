@@ -17,6 +17,23 @@ html, body {
   display: block;
   margin: 0 auto;
 }
+.login {
+  text-align: center;
+}
+.button {
+  font-size: 14px;
+  background-color: #008200;
+  color: #ffffff;
+  padding: 4px 8px 4px 8px;
+  border-top: 1px solid #00b600;
+  border-right: 1px solid #003300;
+  border-bottom: 1px solid #003300;
+  border-left: 1px solid #00b600;
+  border-radius: 6px;
+}
+a.button {
+  text-decoration: none;
+}
 h1, p {
   text-align: center;
 }
