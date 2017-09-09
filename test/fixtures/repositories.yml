@@ -1,7 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-kotfu:
+tomcatmanager:
   service: github
-  service_uid: 100101839
-  name: Kotfu
-  repositories: tomcatmanager
+  organization: tomcatmanager
+  name: tomcatmanager

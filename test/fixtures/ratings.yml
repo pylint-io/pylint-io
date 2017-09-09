@@ -2,18 +2,14 @@
 
 # we expect module to be the same as repo
 one:
-  service: github
-  organization: org
-  repository: repo
+  repository: tomcatmanager
   branch: master
-  module: repo
+  module: tomcatmanager
   rating: 7.79
 
 # module and repository should be different
 two:
-  service: github
-  organization: org
-  repository: repo
+  repository: tomcatmanager
   branch: develop
-  module: mod
+  module: tomcatmanager
   rating: 4.26

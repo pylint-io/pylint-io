@@ -19,13 +19,15 @@ class BadgeController < ApplicationController
     end
     
     conditions = { \
-      :service => :github, \
-      :organization => params[:organization], \
-      :repository => params[:repository], \
+      :repositories => {
+        :service => :github, \
+        :organization => params[:organization], \
+        :name => params[:repository], \
+      },
       :branch => params[:branch], \
       :module => params[:module], \
     }
-    @rating = Rating.where(conditions).order(:created_at).first
+    @rating = Rating.joins(:repository).where(conditions).order(:created_at).first
 
     respond_to do |format|
       format.svg do

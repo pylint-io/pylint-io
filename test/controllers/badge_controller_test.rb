@@ -27,33 +27,33 @@ class BadgeControllerTest < ActionDispatch::IntegrationTest
   test "github routing org only svg" do
     r = ratings(:one)
     assert_raises(ActionController::RoutingError) do
-      get "/github/#{r.organization}.svg"
+      get "/github/#{r.repository.organization}.svg"
     end
   end
 
 
   test "github org repo svg" do
     r = ratings(:one)
-    get "/github/#{r.organization}/#{r.repository}.svg"
+    get "/github/#{r.repository.organization}/#{r.repository.name}.svg"
     assert_response :success
     assert @response.body.include? r.rating.to_s
   end
   test "github org repo json" do
     r = ratings(:one)
-    get "/github/#{r.organization}/#{r.repository}", as: :json
+    get "/github/#{r.repository.organization}/#{r.repository.name}", as: :json
     assert_response :success
     assert_equal JSON.parse(@response.body)["rating"], r.rating.to_s
   end
   
   test "github org repo module" do
     r = ratings(:one)
-    get "/github/#{r.organization}/#{r.repository}/#{r.module}.svg"
+    get "/github/#{r.repository.organization}/#{r.repository.name}/#{r.module}.svg"
     assert_response :success
     assert @response.body.include? r.rating.to_s
   end
   test "github org repo branch module" do
     r = ratings(:two)
-    get "/github/#{r.organization}/#{r.repository}/#{r.branch}/#{r.module}.svg"
+    get "/github/#{r.repository.organization}/#{r.repository.name}/#{r.branch}/#{r.module}.svg"
     assert_response :success
     assert @response.body.include? r.rating.to_s
   end
@@ -62,28 +62,28 @@ class BadgeControllerTest < ActionDispatch::IntegrationTest
   test "github org unknown repo" do
     r = ratings(:one)
     random = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
-    get "/github/#{r.organization}/#{random}.svg"
+    get "/github/#{r.repository.organization}/#{random}.svg"
     assert_response :success
     assert @response.body.include? "unknown"
   end
   test "github org repo default branch unknown module" do
     r = ratings(:one)
     random = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
-    get "/github/#{r.organization}/#{r.repository}/#{random}.svg"
+    get "/github/#{r.repository.organization}/#{r.repository.name}/#{random}.svg"
     assert_response :success
     assert @response.body.include? "unknown"
   end
   test "github org repo unknown branch" do
     r = ratings(:one)
     random = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
-    get "/github/#{r.organization}/#{r.repository}/#{random}/#{r.module}.svg"
+    get "/github/#{r.repository.organization}/#{r.repository.name}/#{random}/#{r.module}.svg"
     assert_response :success
     assert @response.body.include? "unknown"
   end
   test "github org repo branch unknown module" do
     r = ratings(:one)
     random = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
-    get "/github/#{r.organization}/#{r.repository}/#{r.branch}/#{random}.svg"
+    get "/github/#{r.repository.organization}/#{r.repository.name}/#{r.branch}/#{random}.svg"
     assert_response :success
     assert @response.body.include? "unknown"
   end
