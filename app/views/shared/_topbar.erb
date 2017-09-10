@@ -1,0 +1,12 @@
+<div class="topbar">
+  <div class="home">
+    <h1><%= Rails.configuration.application_name %></h1>
+  </div>
+  <div class="links">
+  <% if @current_user %>
+    <%= link_to 'Sign Out', logout_path, class: 'button' %>
+  <% else %>
+    <%= link_to 'Sign in with GitHub', login_path, class: 'github button' %>
+  <% end %>
+  </div>
+</div>
