@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
   get '/auth/failure', to: 'sessions#failure'
   
+  resources :repositories
+#  get '/repos', to: 'repositories#index', :as => :repositories
+  
   get 'badge(/:spec).:format', \
       to: 'badge#generate', spec: /pylint(-(10|\d)\.\d\d)?/, format: /svg/
       

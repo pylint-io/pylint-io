@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class RepositoryTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "url" do
+    repo = repositories(:tomcatmanager)
+    assert repo.url, "https://github.com/tomcatmanager/tomcatmanager"
+  end
 end

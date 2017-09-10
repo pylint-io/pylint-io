@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
   def create
     auth = request.env["omniauth.auth"]
     user = User.where(:service => auth.provider,
-                      :login => auth.extra.raw_info.login).first
+                      :service_uid => auth.uid).first
     if user
       user.token = auth.credentials.token
       user.save
@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
     end
     reset_session
     session[:user_id] = user.id
-    redirect_to root_url, :notice => 'Signed in!'
+    redirect_to repositories_url
   end
 
   def destroy
