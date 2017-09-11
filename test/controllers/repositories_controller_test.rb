@@ -3,10 +3,10 @@ require 'test_helper'
 class RepositoriesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @repository = repositories(:tomcatmanager)
+    mock_login(users(:one))
   end
 
   test "should get index" do
-    mock_login(users(:one))
     get repositories_path
     assert_response :success
   end
@@ -15,6 +15,7 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
   #   get new_repository_url
   #   assert_response :success
   # end
+
   #
   # test "should create repository" do
   #   assert_difference('Repository.count') do

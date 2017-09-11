@@ -15,62 +15,73 @@ class RepositoriesController < ApplicationController
 
   # GET /repositories/new
   def new
+    @repository = Repository.new
+    @repository.service = "github"
     github = Octokit::Client.new(:access_token => @current_user.token)
     @github_repositories = github.repos
-  end
 
-  # GET /repositories/1/edit
-  def edit
-  end
-
-  # POST /repositories
-  # POST /repositories.json
-  def create
-    @repository = Repository.new(repository_params)
-
-    respond_to do |format|
-      if @repository.save
-        format.html { redirect_to @repository, notice: 'Repository was successfully created.' }
-        format.json { render :show, status: :created, location: @repository }
-      else
-        format.html { render :new }
-        format.json { render json: @repository.errors, status: :unprocessable_entity }
+    # see if we have any of the github repos already
+    repositories = @current_user.repositories
+    @github_repositories.each do |gh_repo|
+      match = repositories.where(service: "github", owner: gh_repo.owner.login, name: gh_repo.name).first
+      if match
+        gh_repo.pylint_link = repository_url(match)
       end
     end
   end
 
-  # PATCH/PUT /repositories/1
-  # PATCH/PUT /repositories/1.json
-  def update
-    respond_to do |format|
-      if @repository.update(repository_params)
-        format.html { redirect_to @repository, notice: 'Repository was successfully updated.' }
-        format.json { render :show, status: :ok, location: @repository }
-      else
-        format.html { render :edit }
-        format.json { render json: @repository.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /repositories/1
-  # DELETE /repositories/1.json
-  def destroy
-    @repository.destroy
-    respond_to do |format|
-      format.html { redirect_to repositories_url, notice: 'Repository was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_repository
-      @repository = Repository.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def repository_params
-      params.fetch(:repository, {})
-    end
+  # # GET /repositories/1/edit
+  # def edit
+  # end
+  #
+  # # POST /repositories
+  # # POST /repositories.json
+  # def create
+  #   @repository = Repository.new(repository_params)
+  #
+  #   respond_to do |format|
+  #     if @repository.save
+  #       format.html { redirect_to @repository, notice: 'Repository was successfully created.' }
+  #       format.json { render :show, status: :created, location: @repository }
+  #     else
+  #       format.html { render :new }
+  #       format.json { render json: @repository.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
+  #
+  # # PATCH/PUT /repositories/1
+  # # PATCH/PUT /repositories/1.json
+  # def update
+  #   respond_to do |format|
+  #     if @repository.update(repository_params)
+  #       format.html { redirect_to @repository, notice: 'Repository was successfully updated.' }
+  #       format.json { render :show, status: :ok, location: @repository }
+  #     else
+  #       format.html { render :edit }
+  #       format.json { render json: @repository.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
+  #
+  # # DELETE /repositories/1
+  # # DELETE /repositories/1.json
+  # def destroy
+  #   @repository.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to repositories_url, notice: 'Repository was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
+  #
+  # private
+  #   # Use callbacks to share common setup or constraints between actions.
+  #   def set_repository
+  #     @repository = Repository.find(params[:id])
+  #   end
+  #
+  #   # Never trust parameters from the scary internet, only allow the white list through.
+  #   def repository_params
+  #     params.fetch(:repository, {})
+  #   end
 end

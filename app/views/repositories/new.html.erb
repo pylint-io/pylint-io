@@ -8,7 +8,18 @@
         <h3><a href="<%= repo.html_url %>"><%= repo.full_name %></a></h3>
         <p><%= repo.description %></p>
       </div>
-      <div class="add"><%= link_to 'Register', repositories_path, class: "button" %></div>
+      <div class="action">
+        <% if repo.pylint_link %>
+        <%= link_to "View", repo.pylint_link, class: "button" %> 
+        <% else %>
+          <%= form_with(model: @repository, local: true) do |form| %>
+            <%= form.hidden_field :service %>
+            <%= form.hidden_field :owner, value: repo.owner.login %>
+            <%= form.hidden_field :name, value: repo.name %>
+            <%= form.submit "Register", class: "button" %>
+          <% end %>
+        <% end %>
+      </div>
     </li>
     <% end %>      
   </ul>
