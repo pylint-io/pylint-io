@@ -13,7 +13,7 @@
     <% @repositories.each do |repository| %>
       <tr>
         <td><%= repository.service %></td>
-        <td><%= repository.organization %></td>
+        <td><%= repository.owner %></td>
         <td><%= repository.name %></td>
         <td><%= link_to 'Show', repository %></td>
         <td><%= link_to 'Edit', edit_repository_path(repository) %></td>

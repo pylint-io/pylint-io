@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170910050627) do
+ActiveRecord::Schema.define(version: 20170911184215) do
 
   create_table "ratings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "repository_id"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20170910050627) do
 
   create_table "repositories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "service"
-    t.string "organization"
+    t.string "owner"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

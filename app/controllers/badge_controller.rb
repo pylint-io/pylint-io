@@ -21,7 +21,7 @@ class BadgeController < ApplicationController
     conditions = {
       :repositories => {
         :service => :github,
-        :organization => params[:organization],
+        :owner => params[:owner],
         :name => params[:repository],
       },
       :branch => params[:branch],

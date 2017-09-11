@@ -4,7 +4,7 @@ class Repository < ApplicationRecord
   
   def url
     if self.service == "github"
-      "https://github.com/#{self.organization}/#{self.name}"
+      "https://github.com/#{self.owner}/#{self.name}"
     end
   end
 end

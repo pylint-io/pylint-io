@@ -2,5 +2,5 @@
 
 tomcatmanager:
   service: github
-  organization: tomcatmanager
+  owner: tomcatmanager
   name: tomcatmanager
