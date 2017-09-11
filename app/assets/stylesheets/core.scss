@@ -1,0 +1,59 @@
+// core styles
+// Will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #f3f5e9;
+  color: #003300;
+  font-size: 16px;
+  font-family: monaco, Consolas, 'Lucida Console', monospace;
+}
+
+//
+// layout
+//
+.application {
+  margin-left: 4em;
+  margin-right: 4em;
+}
+
+//
+// headings
+//
+h1 {
+  font-size: 1.5em;
+}
+h2 {
+  font-size: 1.3em;
+}
+h3 {
+  font-size: 1.1em;
+}
+.button {
+  font-size: 14px;
+  background-color: #008200;
+  color: #ffffff;
+  padding: 4px 8px 4px 8px;
+  // these look pretty good
+//  border-top: 1px solid #00a100;
+//  border-right: 1px solid #006300;
+//  border-bottom: 1px solid #006300;
+//  border-left: 1px solid #00a100;
+  border-top: 1px solid #00b600;
+  border-right: 1px solid #00b600;
+  border-bottom: 2px solid #006300;
+  border-left: 1px solid #00b600;
+  border-radius: 6px;
+}
+
+//
+// links
+//
+a {
+  color: #8a1d03;
+}
+a.button {
+  text-decoration: none;
+}

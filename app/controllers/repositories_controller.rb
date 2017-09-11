@@ -15,7 +15,8 @@ class RepositoriesController < ApplicationController
 
   # GET /repositories/new
   def new
-    @repository = Repository.new
+    github = Octokit::Client.new(:access_token => @current_user.token)
+    @github_repositories = github.repos
   end
 
   # GET /repositories/1/edit

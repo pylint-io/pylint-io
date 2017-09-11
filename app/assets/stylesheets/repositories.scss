@@ -1,0 +1,31 @@
+// Styles for the repositories controller and views.
+// Will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.github.repositories {
+
+  ul {
+    display: block;
+    list-style-type: none;
+    padding: 0;
+    border-top: 1px solid #c2b5ad;
+  }
+  li {
+    border-bottom: 1px solid #c2b5ad;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: top;
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
+  h3 {
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
+  p {
+    margin: 0;
+  }
+}
+

@@ -1,5 +1,16 @@
-<h1>New Repository</h1>
+<h1>Register a repository from GitHub</h1>
 
-<%= render 'form', repository: @repository %>
+<div class="github repositories">
+    <ul>
+    <% @github_repositories.each do |repo| %>
+    <li>
+      <div class="info">
+        <h3><a href="<%= repo.html_url %>"><%= repo.full_name %></a></h3>
+        <p><%= repo.description %></p>
+      </div>
+      <div class="add"><%= link_to 'Register', repositories_path, class: "button" %></div>
+    </li>
+    <% end %>      
+  </ul>
+</div>
 
-<%= link_to 'Back', repositories_path %>
