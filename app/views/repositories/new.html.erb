@@ -1,14 +1,17 @@
-<h1>Register a repository from GitHub</h1>
+<h1>Register a GitHub repository</h1>
 
 <div class="github repositories">
     <ul>
     <% @github_repositories.each do |repo| %>
     <li>
       <div class="info">
-        <h3><a href="<%= repo.html_url %>"><%= repo.full_name %></a></h3>
+        <h2><a href="<%= repo.html_url %>"><%= repo.full_name %></a></h2>
+        <% if repo.parent %>
+        <span class="forked">Forked from <%= link_to repo.parent.full_name, repo.parent.html_url %></span>
+        <% end %>
         <p><%= repo.description %></p>
       </div>
-      <div class="action">
+      <div class="actions">
         <% if repo.pylint_link %>
         <%= link_to "View", repo.pylint_link, class: "button" %> 
         <% else %>

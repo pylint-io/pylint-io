@@ -25,10 +25,12 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
   #   assert_redirected_to repository_url(Repository.last)
   # end
   #
-  # test "should show repository" do
-  #   get repository_url(@repository)
-  #   assert_response :success
-  # end
+
+  test "should show repository" do
+    get repository_url(@repository)
+    assert_response :success
+  end
+
   #
   # test "should get edit" do
   #   get edit_repository_url(@repository)

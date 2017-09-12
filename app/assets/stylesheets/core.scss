@@ -20,6 +20,30 @@ html, body {
 }
 
 //
+// header div
+//
+.header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 1em;
+  h1 {
+    display: inline;
+    margin: 0;
+  }
+  .actions {
+    display: flex;
+    flex-direction: row;
+    justfiy-content: flex-end;
+    align-items: center;
+  }
+  p {
+    width: 100%;
+  }
+}
+
+//
 // headings
 //
 h1 {

@@ -13,3 +13,9 @@ two:
   branch: develop
   module: tomcatmanager
   rating: 4.26
+
+three:
+  repository: tomcatmanager
+  branch: develop
+  module: tomcatmanager
+  rating: 5.88

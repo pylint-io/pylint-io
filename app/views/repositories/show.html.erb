@@ -1,4 +1,38 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_repository_path(@repository) %> |
+<div class="repository">
+  <div class="info">
+    <h2><a href="<%= @repository.api_info.html_url %>"><%= @repository.api_info.full_name %></a></h2>
+    <% if @repository.api_info.parent %>
+    <span class="forked">Forked from <%= link_to repo.parent.full_name, repo.parent.html_url %></span>
+    <% end %>
+    <p><%= @repository.api_info.description %></p>
+  </div>
+<% if @repository.branches.present? %>
+  <% @repository.branches.each do |branch| %>
+  <div class="branch">
+    <h2>Branch <%= branch %></h2>
+    <% @repository.modules_in(branch).each do |mod| %>
+    <div class="module">
+      <h3>Module <%= mod %></h3>
+      <table>
+        <% @repository.ratings.where(branch: "master", module: "tomcatmanager").order('created_at desc').each do |rating| %>
+        <tr>
+          <td><%= rating.created_at %></td>
+          <td><%= rating.rating %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+    <% end %>
+  </div>
+  <% end %>
+<% else %>
+  <p>You haven't submitted any ratings for this repository yet.</p>
+<% end %>
+</div>
+
 <%= link_to 'Back', repositories_path %>
+<%= link_to 'Show', repository %>
+<%= link_to 'Edit', edit_repository_path(repository) %>
+<%= link_to 'Destroy', repository, method: :delete, data: { confirm: 'Are you sure?' } %>

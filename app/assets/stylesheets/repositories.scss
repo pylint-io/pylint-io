@@ -2,7 +2,7 @@
 // Will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.github.repositories {
+.repositories {
 
   ul {
     display: block;
@@ -20,12 +20,52 @@
     padding-top: 1em;
     padding-bottom: 1em;
   }
-  h3 {
+  h2 {
     margin-top: 0;
-    margin-bottom: 1em;
+    margin-bottom: 0em;
   }
   p {
-    margin: 0;
+    margin: 1em 0 0 0;
   }
 }
 
+.repository .forked, .repositories .forked {
+  font-size: .8em;
+  color: #c2b5ad;
+}
+
+.repository {
+  display: flex;
+  flex-direction: column;
+  p {
+    margin-left: 2em;
+  }
+  .branch {
+    margin-top: 1em;
+    margin-left: 2em;
+    display: flex;
+    flex-direction: row;
+    .info {
+      width: 20%;
+    }
+  }
+  h3 {
+    display: inline;
+  }
+  .modules {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 100%;
+    align-items: center;
+  }
+  .module {
+    margin-bottom: .25em;
+    width: 45%;
+    margin-right: 5%;
+  }
+  .module > * {
+    vertical-align: middle;
+  }
+}

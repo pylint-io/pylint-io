@@ -1,32 +1,39 @@
 class RepositoriesController < ApplicationController
-  before_action :set_repository, only: [:show, :edit, :update, :destroy]
+  # before_action :set_repository, only: [:show, :edit, :update, :destroy]
   before_action :authenticate!
+
 
   # GET /repositories
   # GET /repositories.json
   def index
-    @repositories = @current_user.repositories
+    @repositories = add_api_info(@current_user.repositories)
   end
 
   # GET /repositories/1
   # GET /repositories/1.json
   def show
+    @repository = add_api_info(Repository.find(params[:id]))
   end
 
   # GET /repositories/new
   def new
     @repository = Repository.new
     @repository.service = "github"
-    github = Octokit::Client.new(:access_token => @current_user.token)
-    @github_repositories = github.repos
 
     # see if we have any of the github repos already
     repositories = @current_user.repositories
-    @github_repositories.each do |gh_repo|
-      match = repositories.where(service: "github", owner: gh_repo.owner.login, name: gh_repo.name).first
-      if match
-        gh_repo.pylint_link = repository_url(match)
+    @github_repositories = []
+    @github.repos.each do |repo|
+      if repo.fork
+        # we have to fetch this because we need the parent info
+        repo = @github.repository(repo.full_name)
       end
+      # we gotta check this in case another user added the repository
+      match = repositories.where(service: "github", owner: repo.owner.login, name: repo.name).first
+      if match
+        repo.pylint_link = repository_url(match)
+      end
+      @github_repositories.push(repo)
     end
   end
 
@@ -74,7 +81,19 @@ class RepositoriesController < ApplicationController
   #   end
   # end
   #
-  # private
+  private
+
+  def add_api_info(repos)
+    # add more api info if the repo is a fork
+    if repos.is_a? Enumerable
+      repos.each do |repo|
+        repo.api_info = @github.repository("#{repo.owner}/#{repo.name}")
+      end
+    else
+      repos.api_info = @github.repository("#{repos.owner}/#{repos.name}")
+    end
+    return repos
+  end
   #   # Use callbacks to share common setup or constraints between actions.
   #   def set_repository
   #     @repository = Repository.find(params[:id])
