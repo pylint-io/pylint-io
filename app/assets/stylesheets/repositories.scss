@@ -2,70 +2,93 @@
 // Will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.repositories {
-
-  ul {
-    display: block;
-    list-style-type: none;
-    padding: 0;
-    border-top: 1px solid #c2b5ad;
-  }
-  li {
-    border-bottom: 1px solid #c2b5ad;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: top;
-    padding-top: 1em;
-    padding-bottom: 1em;
-  }
-  h2 {
-    margin-top: 0;
-    margin-bottom: 0em;
-  }
-  p {
-    margin: 1em 0 0 0;
-  }
-}
-
-.repository .forked, .repositories .forked {
-  font-size: .8em;
-  color: #c2b5ad;
-}
-
 .repository {
   display: flex;
   flex-direction: column;
-  p {
-    margin-left: 2em;
-  }
-  .branch {
-    margin-top: 1em;
-    margin-left: 2em;
-    display: flex;
-    flex-direction: row;
-    .info {
-      width: 20%;
-    }
-  }
-  h3 {
+  h2, h3 {
     display: inline;
+    margin: 0;
   }
-  .modules {
+  .info {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    width: 100%;
-    align-items: center;
+    justify-content: space-between;
+    .actions {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    p {
+      width: 100%;
+      margin: 1em 0 0 0;
+    }
+    p.forked {
+      font-size: .8em;
+      color: #c2b5ad;
+      margin: 0;
+    }
+  }
+  .branch:first-of-type {
+    border-top: 1px solid #c2b5ad;
+  }
+  .branch {
+    padding: 1em 0 1em 0;
+    border-bottom: 1px solid #c2b5ad;
+    .info {
+      margin-bottom: 1em;
+    }
   }
   .module {
-    margin-bottom: .25em;
-    width: 45%;
-    margin-right: 5%;
+    margin: 1em 0 0 2em;
   }
   .module > * {
     vertical-align: middle;
   }
+  table {
+    margin-left: 8em;
+    table-layout: fixed;
+    font-size: .8em;
+    color: #360020;
+  }
+  thead th {
+    border-bottom: 1px solid #c2b5ad;
+  }
+  th, td {
+    padding-right: 1em;
+    text-align: left;
+  }
 }
+
+.repositories {
+  // override repository settings for when there are several listed on the page
+  .repository:first-of-type {
+    border-top: 1px solid #c2b5ad;
+  }
+  .repository {
+    border-bottom: 1px solid #c2b5ad;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    .branch {
+      margin-left: 2em;
+      padding: 1em 0 0 0;
+      border: none;
+    }
+    .modules {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      width: 100%;
+      align-items: center;
+      margin-left: 2em;
+    }
+    .module {
+      margin: 0 0 .25em 0;
+      width: 45%;
+      margin-right: 5%;
+    }
+  }
+}
+

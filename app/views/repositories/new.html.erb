@@ -1,30 +1,32 @@
-<h1>Register a GitHub repository</h1>
+<div class="header">
+  <p id="notice"><%= notice %></p>
+  <h1>Register a GitHub repository</h1>
+  <p>Choose a repository to enable data collection on <%= Rails.configuration.application_name %></p>
+</div>
 
-<div class="github repositories">
-    <ul>
+<div class="repositories">
     <% @github_repositories.each do |repo| %>
-    <li>
+    <div class="repository">
       <div class="info">
         <h2><a href="<%= repo.html_url %>"><%= repo.full_name %></a></h2>
+        <div class="actions">
+          <% if repo.pylint_link %>
+          <%= link_to "View", repo.pylint_link, class: "button" %> 
+          <% else %>
+            <%= form_with(model: @repository, local: true) do |form| %>
+              <%= form.hidden_field :service %>
+              <%= form.hidden_field :owner, value: repo.owner.login %>
+              <%= form.hidden_field :name, value: repo.name %>
+              <%= form.submit "Register", class: "button" %>
+            <% end %>
+          <% end %>
+        </div>
         <% if repo.parent %>
-        <span class="forked">Forked from <%= link_to repo.parent.full_name, repo.parent.html_url %></span>
+        <p class="forked">Forked from <%= link_to repo.parent.full_name, repo.parent.html_url %></p>
         <% end %>
         <p><%= repo.description %></p>
       </div>
-      <div class="actions">
-        <% if repo.pylint_link %>
-        <%= link_to "View", repo.pylint_link, class: "button" %> 
-        <% else %>
-          <%= form_with(model: @repository, local: true) do |form| %>
-            <%= form.hidden_field :service %>
-            <%= form.hidden_field :owner, value: repo.owner.login %>
-            <%= form.hidden_field :name, value: repo.name %>
-            <%= form.submit "Register", class: "button" %>
-          <% end %>
-        <% end %>
-      </div>
-    </li>
+    </div>
     <% end %>      
-  </ul>
 </div>
 
