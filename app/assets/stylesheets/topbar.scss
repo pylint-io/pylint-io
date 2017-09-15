@@ -20,11 +20,15 @@
   color: #f3f5e9;
   font-size: 1rem;
 }
+.topbar .home a {
+  color: #f3f5e9;
+  text-decoration: none;
+}
 .topbar .links {
   margin-right: 2em;
 }
 
-// override button border to match, not button
+// override button border to match background
 .topbar .button {
 //  border-top: 1px solid #5e2600;
 //  border-right: 1px solid #5e2600;
