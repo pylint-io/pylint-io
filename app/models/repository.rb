@@ -20,7 +20,8 @@ class Repository < ApplicationRecord
   has_many :users, :through => :repository_users
   has_many :ratings, inverse_of: :repository
   
-  validates :service, inclusion: { in: %w(github), message: "%{value} is not a valid service" }
+  validates :users, presence: true
+  validates :service, presence: true, inclusion: { in: %w(github), message: "%{value} is not a valid service" }
   validates :owner, presence: true
   validates :name, presence: true
   

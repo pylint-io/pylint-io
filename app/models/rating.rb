@@ -17,4 +17,8 @@
 
 class Rating < ApplicationRecord
   belongs_to :repository
+  validates :repository, presence: true
+  validates :branch, presence: true
+  validates :module, presence: true
+  validates :rating, presence: true
 end
