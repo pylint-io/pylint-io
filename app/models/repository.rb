@@ -1,6 +1,28 @@
+#
+# Copyright (c) 2017 Muzo Labs
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# For a copy of the full license, see LICENSE file included in this
+# distribution or http://www.gnu.org/license
+#
+ 
 class Repository < ApplicationRecord
-  has_and_belongs_to_many :users
-  has_many :ratings #, -> { order "branch, module, created_at DESC" }
+  has_many :repository_users
+  has_many :users, :through => :repository_users
+  has_many :ratings, inverse_of: :repository
+  
+  validates :service, inclusion: { in: %w(github), message: "%{value} is not a valid service" }
+  validates :owner, presence: true
+  validates :name, presence: true
   
   # give a place to stash info from the service api
   attr_accessor :api_info

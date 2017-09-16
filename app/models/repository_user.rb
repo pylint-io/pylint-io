@@ -15,15 +15,9 @@
 # distribution or http://www.gnu.org/license
 # 
 
-class User < ApplicationRecord
-  has_many :repository_users
-  has_many :repositories, :through => :repository_users
-  
-  def self.create_with_omniauth(auth)
-    create! do |user|
-      user.service = auth.provider
-      user.service_uid = auth.uid
-      user.token = auth.credentials.token
-    end
-  end
+class RepositoryUser < ApplicationRecord
+  belongs_to :repository
+  belongs_to :user
+  validates :repository, presence: true
+  validates :user, presence: true
 end
