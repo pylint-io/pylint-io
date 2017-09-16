@@ -33,25 +33,11 @@ class RepositoryTest < ActiveSupport::TestCase
     assert repo.modules_in("master"), ["tomcatmanager"]
   end
   
-  test "require at least one user to save" do
-    repo = Repository.new()
-    repo.service = "github"
-    repo.owner = "pylint-io"
-    repo.name = "pylint-io"
-    assert_raises ActiveRecord::RecordInvalid do
-      repo.save!
-    end
-    u = users(:one)
-    repo.users << u
-    repo.save!
-  end
-  
   test "require valid service to save" do
     repo = Repository.new()
     repo.owner = "pylint-io"
     repo.name = "pylint-io"
-    u = users(:one)
-    repo.users << u
+    repo.users << users(:one)
     assert_raises ActiveRecord::RecordInvalid do
       repo.save!
     end
@@ -67,8 +53,7 @@ class RepositoryTest < ActiveSupport::TestCase
     repo = Repository.new()
     repo.service = "github"
     repo.name = "pylint-io"
-    u = users(:one)
-    repo.users << u
+    repo.users << users(:one)
     assert_raises ActiveRecord::RecordInvalid do
       repo.save!
     end
@@ -80,13 +65,34 @@ class RepositoryTest < ActiveSupport::TestCase
     repo = Repository.new()
     repo.service = "github"
     repo.owner = "pylint-io"
-    u = users(:one)
-    repo.users << u
+    repo.users << users(:one)
     assert_raises ActiveRecord::RecordInvalid do
       repo.save!
     end
     repo.name = "pylint-io"
     repo.save!
   end
-  
+
+  test "require at least one user to save" do
+    repo = Repository.new()
+    repo.service = "github"
+    repo.owner = "pylint-io"
+    repo.name = "pylint-io"
+    assert_raises ActiveRecord::RecordInvalid do
+      repo.save!
+    end
+    repo.users << users(:one)
+    repo.save!
+  end
+
+  test "don't allow duplicate users" do
+    repo = Repository.new()
+    repo.service = "github"
+    repo.owner = "pylint-io"
+    repo.name = "pylint-io"
+    repo.users << users(:one)
+    repo.users << users(:one)
+    repo.save!
+    assert repo.users, [ users(:one) ]
+  end
 end

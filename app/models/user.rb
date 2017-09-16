@@ -17,7 +17,10 @@
 
 class User < ApplicationRecord
   has_many :repository_users
-  has_many :repositories, :through => :repository_users
+  has_many :repositories, -> { distinct }, :through => :repository_users
+  validates :service, presence: true, inclusion: { in: %w(github), message: "%{value} is not a valid service" }
+  validates :service_uid, presence: true
+  validates :token, presence: true
   
   def self.create_with_omniauth(auth)
     create! do |user|

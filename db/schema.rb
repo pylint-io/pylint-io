@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170916011942) do
+ActiveRecord::Schema.define(version: 20170916042406) do
 
   create_table "ratings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "repository_id"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20170916011942) do
   create_table "repository_users", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "repository_id", null: false
     t.bigint "user_id", null: false
+    t.index ["repository_id", "user_id"], name: "index_repository_users_on_repository_id_and_user_id", unique: true
     t.index ["repository_id"], name: "index_repository_users_on_repository_id"
     t.index ["user_id"], name: "index_repository_users_on_user_id"
   end

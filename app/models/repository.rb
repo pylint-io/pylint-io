@@ -17,7 +17,7 @@
  
 class Repository < ApplicationRecord
   has_many :repository_users
-  has_many :users, :through => :repository_users
+  has_many :users, -> { distinct }, :through => :repository_users
   has_many :ratings, inverse_of: :repository
   
   validates :users, presence: true
