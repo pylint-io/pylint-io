@@ -1,4 +1,3 @@
-
 #
 # Copyright (c) 2017 Muzo Labs
 #
@@ -16,11 +15,7 @@
 # distribution or http://www.gnu.org/license
 #
 
-require 'test_helper'
-
-class RatingsControllerTest < ActionDispatch::IntegrationTest
-
-  test "routing" do
-    assert_routing( { path: "/ratings", method: :post }, controller: "ratings", action: "create")
+class RatingsController < ApplicationController
+  def create
   end
 end

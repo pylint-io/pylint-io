@@ -1,7 +1,22 @@
-class RepositoriesController < ApplicationController
-  # before_action :set_repository, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate!
+#
+# Copyright (c) 2017 Muzo Labs
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# For a copy of the full license, see LICENSE file included in this
+# distribution or http://www.gnu.org/license
+#
 
+class RepositoriesController < ApplicationController
+  before_action :authenticate!
 
   # GET /repositories
   # GET /repositories.json
@@ -37,50 +52,36 @@ class RepositoriesController < ApplicationController
     end
   end
 
-  # # GET /repositories/1/edit
-  # def edit
-  # end
-  #
-  # # POST /repositories
-  # # POST /repositories.json
-  # def create
-  #   @repository = Repository.new(repository_params)
-  #
-  #   respond_to do |format|
-  #     if @repository.save
-  #       format.html { redirect_to @repository, notice: 'Repository was successfully created.' }
-  #       format.json { render :show, status: :created, location: @repository }
-  #     else
-  #       format.html { render :new }
-  #       format.json { render json: @repository.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-  #
-  # # PATCH/PUT /repositories/1
-  # # PATCH/PUT /repositories/1.json
-  # def update
-  #   respond_to do |format|
-  #     if @repository.update(repository_params)
-  #       format.html { redirect_to @repository, notice: 'Repository was successfully updated.' }
-  #       format.json { render :show, status: :ok, location: @repository }
-  #     else
-  #       format.html { render :edit }
-  #       format.json { render json: @repository.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-  #
-  # # DELETE /repositories/1
-  # # DELETE /repositories/1.json
-  # def destroy
-  #   @repository.destroy
-  #   respond_to do |format|
-  #     format.html { redirect_to repositories_url, notice: 'Repository was successfully destroyed.' }
-  #     format.json { head :no_content }
-  #   end
-  # end
-  #
+  # POST /repositories
+  # POST /repositories.json
+  def create
+    # TODO make sure they have github access to the repository
+    # they are trying to create
+    @repository = Repository.new(params.fetch(:repository, {}).permit(:service, :owner, :name))
+    @repository.users << @current_user
+
+    respond_to do |format|
+      if @repository.save
+        format.html { redirect_to @repository, notice: 'Repository successfully registered.' }
+        format.json { render :show, status: :created, location: @repository }
+      else
+        format.html { redirect_to :new }
+        format.json { render json: @repository.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /repositories/1
+  # DELETE /repositories/1.json
+  def destroy
+    @repository = Repository.find(params[:id])
+    @repository.destroy
+    respond_to do |format|
+      format.html { redirect_to repositories_url, notice: 'Repository was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+  
   private
 
   def add_api_info(repos)
@@ -94,13 +95,4 @@ class RepositoriesController < ApplicationController
     end
     return repos
   end
-  #   # Use callbacks to share common setup or constraints between actions.
-  #   def set_repository
-  #     @repository = Repository.find(params[:id])
-  #   end
-  #
-  #   # Never trust parameters from the scary internet, only allow the white list through.
-  #   def repository_params
-  #     params.fetch(:repository, {})
-  #   end
 end

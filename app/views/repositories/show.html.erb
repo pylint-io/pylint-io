@@ -4,6 +4,9 @@
   <% if @repository.api_info.parent %>
   <p class="forked">Forked from <%= link_to repo.parent.full_name, repo.parent.html_url %></p>
   <% end %>
+  <div class="actions">
+    <%= link_to "Delete", @repository, method: :delete, data: { confirm: "Are you sure?" }, class: "button" %>
+  </div>
   <p><%= @repository.api_info.description %></p>
 </div>
 
